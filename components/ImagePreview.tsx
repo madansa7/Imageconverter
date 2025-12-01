@@ -14,7 +14,10 @@ const getFileExtension = (mimeType: string) => {
     case 'image/webp': return 'webp';
     case 'image/png': return 'png';
     case 'image/jpeg': return 'jpg';
-    default: return 'img';
+    default: 
+      // Fallback: try to extract subtype from mime, otherwise default to png
+      const subtype = mimeType.split('/')[1];
+      return (subtype && subtype.length <= 4) ? subtype : 'png';
   }
 };
 
@@ -26,7 +29,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
 }) => {
   if (!originalFile || !originalPreviewUrl) return null;
 
-  const extension = processedImage ? getFileExtension(processedImage.blob.type) : '';
+  const extension = processedImage ? getFileExtension(processedImage.blob.type) : 'png';
   
   // Create a nice filename: originalName_processed.ext
   const getDownloadFilename = () => {
