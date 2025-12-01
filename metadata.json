@@ -1,0 +1,5 @@
+{
+  "name": "PixelLift Converter",
+  "description": "A client-side image converter and upscaler. Convert PNG to WebP and upscale images up to 400% directly in your browser without any server uploads.",
+  "requestFramePermissions": []
+}
